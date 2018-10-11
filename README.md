@@ -27,7 +27,9 @@ Delay Reason Distribution: shows distribution of delay reasons for a given fligh
 ## Contribution statement
 
 Yang Yang contributes to data collection and a dynamic html page.
+
 Jiaqian Yu contributes to data cleaning, the Tab "Choose Destination" and all the intergration part.
+
 Tao Han contributes to data preprocessing and the Tab "Choose Months and Carriers".
 
 
