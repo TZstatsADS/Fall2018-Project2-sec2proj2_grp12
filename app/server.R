@@ -8,17 +8,25 @@ flightData <- flightData[flightData$ORIGIN == c("JFK", "LAX", "SEA"),]
 
 temp <-  read.csv("../output/temp.csv",header=T)
 raw_data <-  read.csv("../output/flight_data.csv")
-cancelData=read.csv("../output/cancelData.csv",header=TRUE,as.is=TRUE)
 
 shinyServer(function(input, output) {
   
   
+  ####Jiaqian Yu
   output$map23 <- renderLeaflet({
     
-    flight_path(temp,m=input$month,w=input$week,d=input$destination,o=input$origin)
+    flight_path(dataformap,o=input$Departure,distance1=input$distance[1],distance2=input$distance[2],
+                price1=input$price[1],price2=input$price[2],choice=input$decision)
   })
   
-  output$delay_barplot <- renderPlotly({delay_barplot(temp,t=input$type,m=input$month,w=input$week,d=input$destination,o=input$origin)})
+  #output$delay_barplot <- renderPlotly({delay_barplot(temp,t=input$type,m=input$month,w=input$week,d=input$destination,o=input$origin)})
+  
+  #filtered_data = reactive({filter_data(raw_data,origin=input$origin1,destination=input$destination1)})
+  #output$text <- renderPrint({'what about go to '+flight_path(dataformap,o=input$Departure,distance1=input$distance[1],distance2=input$distance[2],
+  #                                                            price1=input$price[1],price2=input$price[2],delaytime1=input$delaytime[1],
+  #                                                            delaytime2=input$delaytime[2],choice=input$decision)
+  
+  #### Jiaqian Yu
    
   filtered_data = reactive({filter_data(raw_data,origin=input$origin1,destination=input$destination1)})
   
@@ -52,56 +60,6 @@ shinyServer(function(input, output) {
                                                                               destination=input$destination2,
                                                                               month = input$month2))
 
-  # Create Tree Map (Delay Probability in Statistics section)
-  tree_final1=read.csv("../output/treemap1.csv",header=TRUE,as.is=TRUE)
   
-  output$treemap<-renderPlot({
-    #selcet a destination, an origin, a month and a satisfied time point
-    tree_select=tree_final1%>%
-      filter(dest==input$destination3,orig==input$origin3,month==input$mon3,sat_time==input$satisfy_time3)
-    if(nrow(tree_select)!=0){
-      tree_select$label<-paste(tree_select$carrier,", ",round(100*tree_select$prec,2),"%",sep="")
-      treemap(tree_select,index='label',vSize="prec",vColor="label",type="categorical", palette=rainbow(7),aspRatio=30/30,drop.unused.levels = FALSE, position.legend="none")
-    }
-  })
-  
-  output$hcontainer<-renderPlotly({
-    select_data=cancelData%>%
-      filter(dest==input$destination4,orig==input$origin4,month==input$mon4)
-    if(nrow(select_data)!=0){
-      ggplotly(ggplot(select_data, aes(x = total, y = num_cancel, label = carrier)) +
-        geom_point(aes(size = rate/100, colour = carrier, alpha=.02)) + 
-        geom_text(hjust = 1, size = 2) +
-        scale_size(range = c(1,5)) +
-        theme_bw())
-      
-    }})
-                                                                             
-  #========== DINAMIC MAP PART ==========                                                                                                                                               month=input$month2))
-  # Identify origin and destination
-  allPairs <- reactive({
-    subset(flightData, FL_DATE == input$range)%>%
-      select(ORIGIN_Lon, ORIGIN_Lat, DEST_Lon, DEST_Lat, meanDelay)
-  })
-  
-  flightLines <- reactive({
-    gcIntermediate(allPairs()[,c("ORIGIN_Lon", "ORIGIN_Lat")], 
-                   allPairs()[,c("DEST_Lon", "DEST_Lat")], 
-                   n=10, addStartEnd=TRUE, sp = TRUE, breakAtDateLine = TRUE)
-  })
 
-  # Output the route map  
-  output$m_dynamic <- renderLeaflet({
-    leaflet() %>% 
-      addTiles() %>% 
-      setView(lng = -95.7129, lat = 37.0902, zoom = 4)
-  })  
-  
-  observe({
-    leafletProxy("m_dynamic") %>%
-      clearShapes()%>%
-      addPolylines(group = "flights", data = flightLines(),
-                   color = "blue", weight=1)
-  })
- 
 })

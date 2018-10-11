@@ -46,8 +46,9 @@ library(sparklyr)
 
 source("../lib/plot_functions.R")
 source("../lib/filter_data_functions.R")
-source("../lib/flight_path_map.R")
+#source("../lib/flight_path_map.R")
 source("../lib/delay_percent_barplot.R")
+source("../lib/flight_path_map_new.R")
 
 flightData <- read.table(file = "../output/1990.csv",
                          as.is = T, header = T,sep = ",")
@@ -62,8 +63,10 @@ temp <-  read.csv("../output/temp.csv",header=T)
 origins <- as.character(sort(unique(temp$orig)))
 destinations <- as.character(sort(unique(temp$dest)))
 
+dataformap <- read.csv("../output/DataforMap.csv")
+
 #Define UI for application that draws a histogram
-shinyUI(navbarPage(theme = "bootstrap.min-copy.css",'Flight Delay',
+shinyUI(navbarPage(theme = "bootstrap.min-copy.css",'Flight For Travelers',
         tabPanel("Introduction",
                  tabName="Introduction",
                  icon=icon("book"),
@@ -77,71 +80,44 @@ shinyUI(navbarPage(theme = "bootstrap.min-copy.css",'Flight Delay',
                  # titlePanel(h2("Introduction")),
                  # mainPanel(tabPanel("Introduction"))
         ),
-        tabPanel("Dynamic Map of Flights 1990 VS 2010",
-                 tabName="Dynamic Map",
-                 icon=icon("map-o"),
-
-                 sidebarLayout(
-                   sidebarPanel(
-                     sliderInput(inputId ="range",
-                                 label = "Time of data collection:",
-                                 min = min(flightData$FL_DATE),
-                                 max = max(flightData$FL_DATE),
-                                 value = min(flightData$FL_DATE),#The initial value
-                                 step = days(),
-                                 animate = animationOptions(interval = 200))
-                   ),
-                   # Show a tabset that includes a plot, model, and table view
-                   mainPanel(
-                     tabsetPanel(type = "tabs", 
-                                 tabPanel("Map", leafletOutput("m_dynamic"))
-                     )
-                   )
-                 )
-        ),
-        tabPanel('Search you flight',
-                 tabName='Search your flight',
+        
+        tabPanel('Choose Destination',
+                 tabName='Choose your destination',
                  icon=icon('plane'),
                  sidebarLayout(
                    sidebarPanel(
-                
-                     selectInput(inputId = "origin",
-                                 label  = "Select the origin",
-                                 choices = origins,
-                                             selected ='JFK (New York, NY)'),
-                     selectInput(inputId = "destination",
-                                 label  = "Select the destination",
-                                 choices = c('all',destinations),
-                                 selected ='all'),
-                     selectInput(inputId = "month",
-                                 label  = "Select the month",
-                                 choices = c('Jan','Feb','Mar','Apr','May','Jun','Jul',
-                                             'Aug','Sep','Oct','Nov','Dec'),
-                                 selected ='Jul'),
-                     radioButtons(inputId = "week", 
-                                  label = "Select day of the week",
-                                  choices = c('all','Monday','Tuesday','Wednesday','Thursday',
-                                              'Friday','Saturday','Sunday'), 
-                                  selected = 'all'),
                      
-                     radioButtons(inputId = "type",
-                                  label = 'Calculated by:',
-                                  choices = c('Percent of delay flights',
-                                              'Average delay time'),
-                                  selected = 'Percent of delay flights'),
-                     width = 3
-                 ),
-                   
+                     selectInput(inputId = "Departure",
+                                 label  = "Select your city",
+                                 choices = c("All",as.character(unique(dataformap$ORIGIN_CITY))),
+                                 selected ='All'),
+                     sliderInput(inputId = "distance", label = h3("Select the distance"), min = 100, 
+                                 max = 8000, value = c(100,8000)),
+                     sliderInput(inputId = "price", label = h3("Select the price"), min = 5, 
+                                 max = 800, value = c(5,800)),
+                     radioButtons(inputId = "decision", 
+                                  label = "Ready to see the result?",
+                                  choices = c('Yes!','No,I am still choosing..'), 
+                                  selected = 'No,I am still choosing..')
+                     
+                     
+                     
+                     
+                   ),
                    mainPanel(
                      box(leafletOutput("map23"),
-                         width=600),
-                     box(plotlyOutput("delay_barplot",height='200px'),width=300)
-                     )
-                                   
+                         width=600)
+                     #box(textOutput("text"),width=300)
                    )
-                 ),
+                 )
+                 
+                 
+                 ######## Jiaqian Yu
+                 
+                 
+        ),
         
-        tabPanel('Statistics',
+        tabPanel('Choose Months and Companies',
                  tabName='App',
                  icon=icon('bar-chart'),
                  tabsetPanel(type="pill",
