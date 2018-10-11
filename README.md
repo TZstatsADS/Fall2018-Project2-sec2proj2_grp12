@@ -1,6 +1,6 @@
 # Project 2: Flight Delay Analysis Shiny App
 
-You are welcomed to visit our APP [here]... 
+You are welcomed to visit our APP......
 
 ## Team members
 - Yang Yang
