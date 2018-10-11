@@ -8,10 +8,27 @@ You are welcomed to visit our APP......
 - Tao Han
 
 ## Project summary
-We analyze flight delays in US, and show average delay time by carriers and months. We also show the various reasons why flights delay.
+This is a travel app.
+
+The purpose of this app is to aid travelers in choosing a destination, a month to travel and a best flight based on various crtieria, such as distance, price and delay time.
+
+We offer the following services:
+
+Choose Destination: A destination suggestion based on your departure city and desired distance and price.
+We will provide a random destination(of course, sampled by some probabilities) that follows all your request for you.
+Choose Months and Carriers: A month and carrier suggestion based on delay time.
+Delay Time Expectation:
+Expected Flight Delay Time in Minutes: shows expected number of minutes you can expect a given flight to be delayed for a given carrier in a given month
+Number of Delayed Flights: shows the number of delayed flights a given carrier had in each month (sense of scale)
+Delay Time Distribution: shows distribution of delay time for a given flight by carrier
+Delay Reason:
+Delay Reason Distribution: shows distribution of delay reasons for a given flight and month by carrier
 
 ## Contribution statement
-All team members contributed equally in all stages of this project. All members discussed the framework, collected and cleaned data from data.gov, and designed the app. Team members wrote codes for ui.R and server.R for their parts, and combined them together and deployed the app. All team members uploaded their work presented in this GitHub repository including this contributions statement. 
+
+Yang Yang contributes to data collection and a dynamic html page.
+Jiaqian Yu contributes to data cleaning, the Tab "Choose Destination" and all the intergration part.
+Tao Han contributes to data preprocessing and the Tab "Choose Months and Carriers".
 
 
 
