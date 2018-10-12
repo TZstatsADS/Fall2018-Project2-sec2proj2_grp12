@@ -3,7 +3,7 @@ This is a travel app.
 The purpose of this app is to aid travelers in choosing a destination, a month to travel and a best flight based on various crtieria, such as distance, price and delay time.
 
 We offer the following services:
-* [World flight 24](worldaircrafts.html)
+* [World flight 24](http://htmlpreview.github.com/?https://github.com/TZstatsADS/Fall2018-Project2-sec2proj2_grp12/blob/master/app/worldaircrafts.html)
 
 * Choose Destination: A destination suggestion based on your departure city and desired distance and price. 
 	* We will provide a random destination(of course, sampled by some probabilities) that follows all your request for you.
