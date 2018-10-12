@@ -3,6 +3,8 @@ This is a travel app.
 The purpose of this app is to aid travelers in choosing a destination, a month to travel and a best flight based on various crtieria, such as distance, price and delay time.
 
 We offer the following services:
+* [World flight 24](worldaircrafts.html)
+
 * Choose Destination: A destination suggestion based on your departure city and desired distance and price. 
 	* We will provide a random destination(of course, sampled by some probabilities) that follows all your request for you.
 * Choose Months and Carriers: A month and carrier suggestion based on delay time.
@@ -12,3 +14,4 @@ We offer the following services:
 		* Delay Time Distribution: shows distribution of delay time for a given flight by carrier
 	* Delay Reason:
 		* Delay Reason Distribution: shows distribution of delay reasons for a given flight and month by carrier
+

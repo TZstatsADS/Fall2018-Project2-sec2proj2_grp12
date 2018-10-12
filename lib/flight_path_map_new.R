@@ -1,34 +1,3 @@
-
-
-# flight_path <- function(data,m,o,d){
-#   if(d=='all'){
-#     df <- filter(data,month==m,orig==o)
-#   }
-#   else{
-#     df <- filter(data,month==m,orig==o,dest==d)
-#   }
-#   
-#   gcIntermediate(df[,c("Longitude_orig","Latitude_orig")],
-#                  df[,c("Longitude_dest","Latitude_dest")],
-#                  n=50, 
-#                  addStartEnd=TRUE,
-#                  sp=TRUE) %>% 
-#     leaflet() %>% 
-#     setView(lng = -95.7129, lat = 37.0902, zoom = 4) %>%
-#     addTiles() %>% 
-#     addProviderTiles(providers$Stamen.TonerLite) %>% 
-#     addPolylines(weight=2,color = 'orange')
-#                     
-#     
-#     #%>% 
-#     #addMarkers(data=df[,c("Longitude_orig","Latitude_orig")],
-#                #lng = ~Longitude_orig, lat = ~Latitude_orig)
-#     
-# }
-
-
-
-
 flight_path <- function(data,o,distance1,distance2,price1,price2,delaytime1,delaytime2,choice){
 #  if(d=='all'){
 #    if(w=='all'){
@@ -92,32 +61,3 @@ flight_path <- function(data,o,distance1,distance2,price1,price2,delaytime1,dela
   #return(location)
 }
       
-    
-      
-  #lng = ~Longitude_orig, lat = ~Latitude_orig)
-
-    
-
-
-#, popup = ~as.character(orig), label = ~as.character(orig)
-
-#flight_path(temp,'Jul','JFK (New York, NY)','LAX (Los Angeles, CA)')
-
-# 'LAX (Los Angeles, CA)'
-# 
-# x <- seq(0,1,0.1)
-# plot(x,x,col=cc)
-# 
-# cc <- color.scale(x,cs1=c(0,1),cs2=c(0,1),cs3=c(0,1),alpha=1,
-#             extremes=NA,na.color=NA,xrange=NULL,color.spec="rgb")
-# cc
-# 
-# cc <- heat.colors(11, alpha = 1)
-# 
-# colfunc <- colorRampPalette(c("white","red"))
-# colfunc(10)
-# plot(rep(1,10),col=colorRampPalette(c("white","red"))(10),pch=19,cex=3)
-
-
-
-

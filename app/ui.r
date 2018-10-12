@@ -46,24 +46,28 @@ library(sparklyr)
 
 source("../lib/plot_functions.R")
 source("../lib/filter_data_functions.R")
-#source("../lib/flight_path_map.R")
-source("../lib/delay_percent_barplot.R")
+# source("../lib/flight_path_map.R")
+# source("../lib/delay_percent_barplot.R")
 source("../lib/flight_path_map_new.R")
-
-flightData <- read.table(file = "../output/1990.csv",
-                         as.is = T, header = T,sep = ",")
-flightData$FL_DATE <- parse_date_time(flightData$FL_DATE, "%Y-%m-%d")
-flightData <- flightData[flightData$ORIGIN == c("JFK", "LAX", "SEA"),]
+# 
+# flightData <- read.table(file = "../output/1990.csv",
+#                          as.is = T, header = T,sep = ",")
+# flightData$FL_DATE <- parse_date_time(flightData$FL_DATE, "%Y-%m-%d")
+# flightData <- flightData[flightData$ORIGIN == c("JFK", "LAX", "SEA"),]
 
 raw_data = read.csv("../output/flight_data.csv")
 dest_airport=c('All',as.character(sort(unique(raw_data$dest))))
 orig_airport=c('All',as.character(sort(unique(raw_data$orig))))
 
-temp <-  read.csv("../output/temp.csv",header=T)
-origins <- as.character(sort(unique(temp$orig)))
-destinations <- as.character(sort(unique(temp$dest)))
+# temp <-  read.csv("../output/temp.csv",header=T)
+# origins <- as.character(sort(unique(temp$orig)))
+# destinations <- as.character(sort(unique(temp$dest)))
 
 dataformap <- read.csv("../output/DataforMap.csv")
+
+file_content <- function(file) {
+  return(readChar(file, file.info(file)$size))
+}
 
 #Define UI for application that draws a histogram
 shinyUI(navbarPage(theme = "bootstrap.min-copy.css",'Flight For Travelers',
@@ -80,7 +84,17 @@ shinyUI(navbarPage(theme = "bootstrap.min-copy.css",'Flight For Travelers',
                  # titlePanel(h2("Introduction")),
                  # mainPanel(tabPanel("Introduction"))
         ),
-        
+        # tabPanel("worldflight24",
+        #          tabName="Aircrafts around the World",
+        #          icon=icon('location-arrow'),
+        #          #menuItem("Overview",tabName="Overview",icon=icon("book")),
+        #          
+        #          mainPanel(
+        #            HTML(file_content("worldaircrafts.html"))
+        #          )
+        #          # titlePanel(h2("Introduction")),
+        #          # mainPanel(tabPanel("Introduction"))
+        # ),
         tabPanel('Choose Destination',
                  tabName='Choose your destination',
                  icon=icon('plane'),

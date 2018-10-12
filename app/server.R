@@ -1,12 +1,12 @@
 library(shiny)
 options(shiny.sanitize.errors = FALSE)
 
-flightData <- read.table(file = "../output/1990.csv",
-                         as.is = T, header = T,sep = ",")
-flightData$FL_DATE <- parse_date_time(flightData$FL_DATE, "%Y-%m-%d")
-flightData <- flightData[flightData$ORIGIN == c("JFK", "LAX", "SEA"),]
+# flightData <- read.table(file = "../output/1990.csv",
+#                          as.is = T, header = T,sep = ",")
+# flightData$FL_DATE <- parse_date_time(flightData$FL_DATE, "%Y-%m-%d")
+# flightData <- flightData[flightData$ORIGIN == c("JFK", "LAX", "SEA"),]
 
-temp <-  read.csv("../output/temp.csv",header=T)
+# temp <-  read.csv("../output/temp.csv",header=T)
 raw_data <-  read.csv("../output/flight_data.csv")
 dataformap <- read.csv("../output/DataforMap.csv")
 
