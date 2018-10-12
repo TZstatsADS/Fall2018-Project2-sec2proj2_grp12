@@ -8,6 +8,7 @@ flightData <- flightData[flightData$ORIGIN == c("JFK", "LAX", "SEA"),]
 
 temp <-  read.csv("../output/temp.csv",header=T)
 raw_data <-  read.csv("../output/flight_data.csv")
+dataformap <- read.csv("../output/DataforMap.csv")
 
 shinyServer(function(input, output) {
   
