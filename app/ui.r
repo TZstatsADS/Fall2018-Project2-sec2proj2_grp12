@@ -1,31 +1,31 @@
-packages.used <- 
-  c("ggplot2",
-    "plyr",
-    "reshape2",
-    "reshape",
-    "shiny",
-    "dplyr",
-    "lubridate",
-    "zoo",
-    "treemap",
-    "plotly",
-    "leaflet",
-    "geosphere",
-    "shinydashboard",
-    "ROCR",
-    "sparklyr",
-    "DT"
-
-  )
-
-# check packages that need to be installed.
-packages.needed=setdiff(packages.used, 
-                        intersect(installed.packages()[,1], 
-                                  packages.used))
-# install additional packages
-if(length(packages.needed)>0){
-  install.packages(packages.needed, dependencies = TRUE)
-}
+# packages.used <- 
+#   c("ggplot2",
+#     "plyr",
+#     "reshape2",
+#     "reshape",
+#     "shiny",
+#     "dplyr",
+#     "lubridate",
+#     "zoo",
+#     "treemap",
+#     "plotly",
+#     "leaflet",
+#     "geosphere",
+#     "shinydashboard",
+#     "ROCR",
+#     "sparklyr",
+#     "DT"
+# 
+#   )
+# 
+# # check packages that need to be installed.
+# packages.needed=setdiff(packages.used, 
+#                         intersect(installed.packages()[,1], 
+#                                   packages.used))
+# # install additional packages
+# if(length(packages.needed)>0){
+#   install.packages(packages.needed, dependencies = TRUE)
+# }
 
 #load the packages
 library(ggplot2)
@@ -44,26 +44,18 @@ library(DT)
 library(sparklyr)
 
 
-source("../lib/plot_functions.R")
-source("../lib/filter_data_functions.R")
-# source("../lib/flight_path_map.R")
-# source("../lib/delay_percent_barplot.R")
-source("../lib/flight_path_map_new.R")
-# 
-# flightData <- read.table(file = "../output/1990.csv",
-#                          as.is = T, header = T,sep = ",")
-# flightData$FL_DATE <- parse_date_time(flightData$FL_DATE, "%Y-%m-%d")
-# flightData <- flightData[flightData$ORIGIN == c("JFK", "LAX", "SEA"),]
+source("plot_functions.R")
+source("filter_data_functions.R")
 
-raw_data = read.csv("../output/flight_data.csv")
+source("flight_path_map_new.R")
+
+
+raw_data = read.csv("flight_data.csv")
 dest_airport=c('All',as.character(sort(unique(raw_data$dest))))
 orig_airport=c('All',as.character(sort(unique(raw_data$orig))))
 
-# temp <-  read.csv("../output/temp.csv",header=T)
-# origins <- as.character(sort(unique(temp$orig)))
-# destinations <- as.character(sort(unique(temp$dest)))
 
-dataformap <- read.csv("../output/DataforMap.csv")
+dataformap <- read.csv("DataforMap.csv")
 
 file_content <- function(file) {
   return(readChar(file, file.info(file)$size))
@@ -84,17 +76,7 @@ shinyUI(navbarPage(theme = "bootstrap.min-copy.css",'Flight For Travelers',
                  # titlePanel(h2("Introduction")),
                  # mainPanel(tabPanel("Introduction"))
         ),
-        # tabPanel("worldflight24",
-        #          tabName="Aircrafts around the World",
-        #          icon=icon('location-arrow'),
-        #          #menuItem("Overview",tabName="Overview",icon=icon("book")),
-        #          
-        #          mainPanel(
-        #            HTML(file_content("worldaircrafts.html"))
-        #          )
-        #          # titlePanel(h2("Introduction")),
-        #          # mainPanel(tabPanel("Introduction"))
-        # ),
+
         tabPanel('Choose Destination',
                  tabName='Choose your destination',
                  icon=icon('plane'),

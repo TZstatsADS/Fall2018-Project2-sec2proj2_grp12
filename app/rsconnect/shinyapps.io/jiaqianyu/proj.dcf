@@ -1,0 +1,12 @@
+name: proj
+title: proj
+username:
+account: jiaqianyu
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 511582
+bundleId: 1641546
+url: https://jiaqianyu.shinyapps.io/proj/
+when: 1539487091.0375
+asMultiple: FALSE
+asStatic: FALSE
