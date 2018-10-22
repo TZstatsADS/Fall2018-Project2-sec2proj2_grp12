@@ -1,6 +1,6 @@
 # Project 2: Flight Delay Analysis Shiny App
 
-You are welcomed to visit our APP......
+You are welcomed to visit our APP at https://jiaqianyu.shinyapps.io/proj
 
 ## Team members
 - Yang Yang
@@ -28,7 +28,7 @@ Delay Reason Distribution: shows distribution of delay reasons for a given fligh
 
 Yang Yang contributes to data collection and a dynamic html page.
 
-Jiaqian Yu contributes to data cleaning, the Tab "Choose Destination" , all the intergration and GitHub repo.
+Jiaqian Yu contributes to data cleaning, the Tab "Choose Destination" , all the integration and GitHub repo.
 
 Tao Han contributes to data preprocessing and the Tab "Choose Months and Carriers".
 
